@@ -17,11 +17,9 @@ def hapi2pandas(data, meta):
     
     # Put each parameter into a DataFrame
 
-    # Annoyingly, sometimes people use 'Time' and sometimes 'time'
-    try:
-        df_Time   = pandas.DataFrame(hapitime2datetime(data['Time']))
-    except:
-        df_Time   = pandas.DataFrame(hapitime2datetime(data['time']))
+    # Time is always the first meta
+    tkey = ((meta['parameters'])[0])['name']
+    df_Time   = pandas.DataFrame(hapitime2datetime(data[tkey]))
         
     para = meta['parameters']
     dfset = [df_Time]
